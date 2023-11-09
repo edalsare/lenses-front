@@ -1,7 +1,7 @@
-import App from "./components/login/login";
+import Homes from "./components/page";
 
 export default function Home() {
   return(
-    <App/>
+    <Homes/>
   ); 
 }

@@ -5,10 +5,12 @@ import Register from "../regiter/register";
 import Link from "next/link";
 
 const App = () => {
+  
   useEffect(() => {
-    let mensaje = new SpeechSynthesisUtterance(" ");
-    window.speechSynthesis.speak(mensaje);
+    
   }, []);
+
+
 
   const [estado, setEstado] = useState("");
   const [ban, setBan] = useState(1);
@@ -17,32 +19,55 @@ const App = () => {
   const router = useRouter();
 
   const fetchPosts = () => {
+
     const reconocimiento = new window.webkitSpeechRecognition();
     reconocimiento.lang = "es-ES";
 
-    if (ban == 1) {
-      let mensaje = new SpeechSynthesisUtterance("Menciona nombre y apellido");
+    let mensaje = new SpeechSynthesisUtterance("pagina de inicio de sesión");
       window.speechSynthesis.speak(mensaje);
+      let mensaje1 = new SpeechSynthesisUtterance("Si te encuentras registrado di continuar");
+      window.speechSynthesis.speak(mensaje1);
+      let mensaje2 = new SpeechSynthesisUtterance("Para registrarte di siguiente");
+      window.speechSynthesis.speak(mensaje2);
+      let mensaje3 = new SpeechSynthesisUtterance("Para regresar al menu anterior di regresar");
+      window.speechSynthesis.speak(mensaje3);
+
+
       setTimeout(() => {
         reconocimiento.onresult = function (event) {
           console.log(event.results[0][0].transcript);
-          setNombre(event.results[0][0].transcript);
+          var ban = (event.results[0][0].transcript);
+          
+            let mensaje = new SpeechSynthesisUtterance("Menciona usario");
+            window.speechSynthesis.speak(mensaje);
+            setTimeout(() => {
+              reconocimiento.onresult = function (event) {
+                console.log(event.results[0][0].transcript);
+                setNombre(event.results[0][0].transcript);
+              };
+              reconocimiento.start();
+              setBan(2);
+            }, 1200);
+          setTimeout(() => {
+            let mensaje1 = new SpeechSynthesisUtterance("Menciona Contraseña");
+            window.speechSynthesis.speak(mensaje1);
+            setTimeout(() => {
+              reconocimiento.onresult = function (event) {
+                console.log(event.results[0][0].transcript);
+                setContrasena(event.results[0][0].transcript);
+              };
+              reconocimiento.start();
+              setBan(2);
+            }, 1500);
+          }, 4800);
+            
+          
         };
         reconocimiento.start();
-        setBan(2);
-      }, 1800);
-    } else {
-      let mensaje = new SpeechSynthesisUtterance("Menciona");
-      window.speechSynthesis.speak(mensaje);
-      setTimeout(() => {
-        reconocimiento.onresult = function (event) {
-          console.log(event.results[0][0].transcript);
-          setNombre(event.results[0][0].transcript);
-        };
-        reconocimiento.start();
-        setBan(2);
-      }, 1800);
-    }
+      }, 10000);
+      
+
+    
   };
 
   const prueba = () => {
@@ -55,13 +80,14 @@ const App = () => {
       <button onClick={prueba}>aqui</button> 
       {estado === "Hola." ||estado === "Hola" ? <Register></Register> : <h1>no habla</h1>}
     </div>*/
+    
     <section className="vh-100" onKeyDown={fetchPosts} tabIndex={0}>
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-6 text-black">
             <div className="px-5 ms-xl-4">
               <i className="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"></i>
-              <span className="h1 fw-bold mb-0">Logo</span>
+              <span className="h1 fw-bold mb-0">LENSES</span>
             </div>
 
             <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
@@ -84,6 +110,7 @@ const App = () => {
                   <input
                     type="password"
                     id="form2Example28"
+                    value={contrasena}
                     className="form-control form-control-lg"
                   />
                   <label className="form-label" form="form2Example28">
@@ -124,6 +151,7 @@ const App = () => {
         </div>
       </div>
     </section>
+    
   );
 };
 export default App;

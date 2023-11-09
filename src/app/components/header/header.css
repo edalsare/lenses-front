@@ -1,0 +1,8 @@
+.containerHeader{
+    position:sticky;
+    border: 1px solid rgb(135, 231, 217);
+    border-radius: 10px;
+    padding: 5px;
+    justify-content: space-between;
+    align-items:center;
+};
