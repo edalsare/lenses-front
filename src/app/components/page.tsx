@@ -10,7 +10,7 @@ const router = useRouter();
 
   const navMenu = () =>{
     
-      /*let mensaje2 = new SpeechSynthesisUtterance("Bienvenido, menciona las iguientes palabras para navegar");
+      let mensaje2 = new SpeechSynthesisUtterance("Bienvenido, menciona las iguientes palabras para navegar");
       window.speechSynthesis.speak(mensaje2);
       let mensaje1 = new SpeechSynthesisUtterance("uno, menciona evaluar para probar tus conocimientos");
       window.speechSynthesis.speak(mensaje1);
@@ -18,8 +18,8 @@ const router = useRouter();
       window.speechSynthesis.speak(mensaje3);
       let mensaje4 = new SpeechSynthesisUtterance("tres, menciona mensaje para dejarnos tus inquietudes");
       window.speechSynthesis.speak(mensaje4);
-      let mensaje5 = new SpeechSynthesisUtterance("para repetir este menu presiona una tecla y di repetir");
-      window.speechSynthesis.speak(mensaje5);*/
+      let mensaje5 = new SpeechSynthesisUtterance("para repetir este menu presiona una tecla");
+      window.speechSynthesis.speak(mensaje5);
 
 
       setTimeout(() => {
@@ -35,7 +35,7 @@ const router = useRouter();
           }
         };
         reconocimiento.start();
-      }, 2000);
+      }, 17000);
 
     
 

@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Register from "../regiter/register";
-import Link from "next/link";
 
 const App = () => {
   
@@ -11,8 +9,6 @@ const App = () => {
   }, []);
 
 
-
-  const [estado, setEstado] = useState("");
   const [ban, setBan] = useState(1);
   const [nombre, setNombre] = useState("");
   const [contrasena, setContrasena] = useState("");
@@ -23,7 +19,8 @@ const App = () => {
     const reconocimiento = new window.webkitSpeechRecognition();
     reconocimiento.lang = "es-ES";
 
-    let mensaje = new SpeechSynthesisUtterance("pagina de inicio de sesión");
+    if(ban==1){
+      let mensaje = new SpeechSynthesisUtterance("pagina de inicio de sesión");
       window.speechSynthesis.speak(mensaje);
       let mensaje1 = new SpeechSynthesisUtterance("Si te encuentras registrado di continuar");
       window.speechSynthesis.speak(mensaje1);
@@ -38,50 +35,60 @@ const App = () => {
           console.log(event.results[0][0].transcript);
           var ban = (event.results[0][0].transcript);
           
+          if(ban=="Continuar."){
+            //se encarga de ecuchar e ingresar usuario
             let mensaje = new SpeechSynthesisUtterance("Menciona usario");
             window.speechSynthesis.speak(mensaje);
             setTimeout(() => {
               reconocimiento.onresult = function (event) {
-                console.log(event.results[0][0].transcript);
                 setNombre(event.results[0][0].transcript);
               };
               reconocimiento.start();
-              setBan(2);
             }, 1200);
+            //se encarga de ecuchar e ingresar contraseña
           setTimeout(() => {
+            setBan(2);
             let mensaje1 = new SpeechSynthesisUtterance("Menciona Contraseña");
             window.speechSynthesis.speak(mensaje1);
-            setTimeout(() => {
+              setTimeout(() => {
               reconocimiento.onresult = function (event) {
-                console.log(event.results[0][0].transcript);
                 setContrasena(event.results[0][0].transcript);
               };
               reconocimiento.start();
-              setBan(2);
             }, 1500);
           }, 4800);
-            
-          
+          }//fin if continuar
+          else if(ban=="Siguiente."){
+            router.push("/components/register");
+          }//fin if siguiente
+          else if(ban=="Regresar."){
+            router.push("/");
+          }          
         };
         reconocimiento.start();
       }, 10000);
-      
+    }else if(ban==2){
+      let mensaje1 = new SpeechSynthesisUtterance("Di aceptar para ingresar, o di cancelar para declinar");
+            window.speechSynthesis.speak(mensaje1);
+            reconocimiento.onresult = function (event) {
+              var men=(event.results[0][0].transcript);
+              if(men=="Aceptar."){
+                setBan(1);
+                setNombre("");
+                setContrasena("");
+              }else if(men=="Cancelar."){
+                setBan(1);
+                setNombre("");
+                setContrasena("");
+              }
+            };
+            reconocimiento.start();
+    } 
 
-    
-  };
-
-  const prueba = () => {
-    router.push("/prueba");
-  };
+  };  
 
   return (
-    /*<div className="App" onKeyDown={fetchPosts} tabIndex={0}>
-      <div >prueba</div>
-      <button onClick={prueba}>aqui</button> 
-      {estado === "Hola." ||estado === "Hola" ? <Register></Register> : <h1>no habla</h1>}
-    </div>*/
-    
-    <section className="vh-100" onKeyDown={fetchPosts} tabIndex={0}>
+   <section className="vh-100" onKeyDown={fetchPosts} tabIndex={0}>
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-6 text-black">
@@ -94,7 +101,7 @@ const App = () => {
               <form>
                 <h3 className="fw-normal mb-3 pb-3">Log in</h3>
 
-                <div className="form-outline mb-4">
+                <div className="form-outline mb-4"> 
                   <input
                     type="email"
                     id="form2Example18"
@@ -102,7 +109,7 @@ const App = () => {
                     className="form-control form-control-lg"
                   />
                   <label className="form-label" form="form2Example18">
-                    Email address
+                    Usser
                   </label>
                 </div>
 
@@ -134,7 +141,7 @@ const App = () => {
                 </p>
                 <p>
                   Don't have an account?{" "}
-                  <a href="#!" className="link-info">
+                  <a href="/components/register" className="link-info">
                     Register here
                   </a>
                 </p>
