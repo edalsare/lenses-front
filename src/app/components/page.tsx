@@ -27,10 +27,12 @@ const router = useRouter();
       reconocimiento.lang = "es-ES";
         reconocimiento.onresult = function (event) {
           var aux = (event.results[0][0].transcript);
-          if(aux=="Repetir."){            
+          console.log(aux)
+          if(aux=="Repetir." || aux=="repetir"){            
             setItems(event.results[0][0].transcript);
             navMenu();
-          }else if(aux=="Comenzar."){
+          }else if(aux=="Comenzar." || aux=="comenzar" ){
+            console.log(aux);
             router.push("/components/login");
           }
         };

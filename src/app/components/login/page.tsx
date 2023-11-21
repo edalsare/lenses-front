@@ -35,7 +35,7 @@ const App = () => {
           console.log(event.results[0][0].transcript);
           var ban = (event.results[0][0].transcript);
           
-          if(ban=="Continuar."){
+          if(ban=="Continuar." || ban=="continuar"){
             //se encarga de ecuchar e ingresar usuario
             let mensaje = new SpeechSynthesisUtterance("Menciona usario");
             window.speechSynthesis.speak(mensaje);
@@ -58,10 +58,10 @@ const App = () => {
             }, 1500);
           }, 4800);
           }//fin if continuar
-          else if(ban=="Siguiente."){
+          else if(ban=="Siguiente." || ban=="siguiente"){
             router.push("/components/register");
           }//fin if siguiente
-          else if(ban=="Regresar."){
+          else if(ban=="Regresar." || ban=="regresar"){
             router.push("/");
           }          
         };
@@ -72,11 +72,11 @@ const App = () => {
             window.speechSynthesis.speak(mensaje1);
             reconocimiento.onresult = function (event) {
               var men=(event.results[0][0].transcript);
-              if(men=="Aceptar."){
+              if(men=="Aceptar." || men=="aceptar"){
                 setBan(1);
                 setNombre("");
                 setContrasena("");
-              }else if(men=="Cancelar."){
+              }else if(men=="Cancelar." ||men=="cancelar"){
                 setBan(1);
                 setNombre("");
                 setContrasena("");
@@ -105,7 +105,7 @@ const App = () => {
                   <input
                     type="email"
                     id="form2Example18"
-                    value={nombre}
+                    defaultValue={nombre}
                     className="form-control form-control-lg"
                   />
                   <label className="form-label" form="form2Example18">
@@ -117,7 +117,7 @@ const App = () => {
                   <input
                     type="password"
                     id="form2Example28"
-                    value={contrasena}
+                    defaultValue={contrasena}
                     className="form-control form-control-lg"
                   />
                   <label className="form-label" form="form2Example28">

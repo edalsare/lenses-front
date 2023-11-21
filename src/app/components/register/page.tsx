@@ -23,8 +23,6 @@ const Register = () => {
     reconocimiento.onresult = function (event) {
       setMen(event.results[0][0].transcript);
       setEstado(estado + 1);
-      console.log(men);
-      console.log(estado);
     };
     reconocimiento.start();
   };
@@ -58,7 +56,7 @@ const Register = () => {
       mensaje();
     }
 
-    if (men == "Continuar.") {
+    if (men == "Continuar." || men == "continuar") {
       if (estado == 2) {
         //se encarga de ecuchar e ingresar usuario
         reconocimiento.onresult = function (event) {
@@ -132,7 +130,7 @@ const Register = () => {
         setTimeout(() => {
           reconocimiento.onresult = function (event) {
             var aux=(event.results[0][0].transcript);
-            if(aux=="Aceptar."){
+            if(aux=="Aceptar." || aux=="aceptar"){
               setNombre("");
               setApellido("");
               setUsers("");
@@ -142,7 +140,7 @@ const Register = () => {
               setRecon("");
               setEstado(1);
               setMen("");
-            }else if(aux=="Cancelar."){
+            }else if(aux=="Cancelar." || aux=="cancelar"){
               setNombre("");
               setApellido("");
               setUsers("");
@@ -164,10 +162,10 @@ const Register = () => {
       }
 
     } //fin if continuar
-    else if (men == "Regresar.") {
+    else if (men == "Regresar." || men == "regresar") {
       router.push("/components/login");
     } //fin if siguiente
-    else if (men == "Inicio.") {
+    else if (men == "Inicio." || men == "inicio") {
       router.push("/");
     }
   };
@@ -178,7 +176,7 @@ const Register = () => {
         <div className="row">
           <div className="col-sm-6 px-0 d-none d-sm-block">
             <img
-              src="/img/login.jpeg"
+              src="/img/vision.jpg"
               alt="Login image"
               className="w-100 vh-100"
             />
@@ -198,7 +196,7 @@ const Register = () => {
                     <input
                       type="text"
                       id="names"
-                      value={nombre}
+                      defaultValue={nombre}
                       className="form-control form-control-lg"
                     />
                     <label className="form-label" form="names">
@@ -209,7 +207,7 @@ const Register = () => {
                     <input
                       type="text"
                       id="lastName"
-                      value={apellido}
+                      defaultValue={apellido}
                       className="form-control form-control-lg"
                     />
                     <label className="form-label" form="LastName">
@@ -223,7 +221,7 @@ const Register = () => {
                     <input
                       type="text"
                       id="user"
-                      value={users}
+                      defaultValue={users}
                       className="form-control form-control-lg"
                     />
                     <label className="form-label" form="user">
@@ -234,7 +232,7 @@ const Register = () => {
                     <input
                       type="text"
                       id="telephone"
-                      value={tel}
+                      defaultValue={tel}
                       className="form-control form-control-lg"
                     />
                     <label className="form-label" form="telephone">
@@ -247,7 +245,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="email"
-                    value={email}
+                    defaultValue={email}
                     className="form-control form-control-lg"
                   />
                   <label className="form-label" form="email">
@@ -260,7 +258,7 @@ const Register = () => {
                     <input
                       type="password"
                       id="password"
-                      value={contrasena}
+                      defaultValue={contrasena}
                       className="form-control form-control-lg"
                     />
                     <label className="form-label" form="password">
@@ -271,7 +269,7 @@ const Register = () => {
                     <input
                       type="password"
                       id="repeat"
-                      value={recon}
+                      defaultValue={recon}
                       className="form-control form-control-lg"
                     />
                     <label className="form-label" form="repeat">
