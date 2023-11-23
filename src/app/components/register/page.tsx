@@ -176,7 +176,7 @@ const Register = () => {
         <div className="row">
           <div className="col-sm-6 px-0 d-none d-sm-block">
             <img
-              src="/img/vision.jpg"
+              src="/img/register.jpeg"
               alt="Login image"
               className="w-100 vh-100"
             />
