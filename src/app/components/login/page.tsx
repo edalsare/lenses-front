@@ -106,7 +106,7 @@ const App = () => {
                     type="email"
                     id="form2Example18"
                     defaultValue={nombre}
-                    className="form-control form-control-lg"
+                    className="form-control form-control-lg shadow"
                   />
                   <label className="form-label" form="form2Example18">
                     Usser
@@ -118,7 +118,7 @@ const App = () => {
                     type="password"
                     id="form2Example28"
                     defaultValue={contrasena}
-                    className="form-control form-control-lg"
+                    className="form-control form-control-lg shadow"
                   />
                   <label className="form-label" form="form2Example28">
                     Password
@@ -127,14 +127,14 @@ const App = () => {
 
                 <div className="pt-1 mb-4">
                   <button
-                    className="btn btn-info btn-lg btn-block"
+                    className="btn btn-outline-success btn-lg  shadow"
                     type="button"
                   >
                     Login
                   </button>
                 </div>
 
-                <p className="small mb-5 pb-lg-2">
+                <p className="small mb-5 pb-lg-2 ">
                   <a className="text-muted" href="#!">
                     Forgot password?
                   </a>

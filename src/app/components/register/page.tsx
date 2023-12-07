@@ -171,7 +171,7 @@ const Register = () => {
   };
 
   return (
-    <section className="vh-100" onKeyDown={fetchPosts} tabIndex={0}>
+    <section className="pb-0" onKeyDown={fetchPosts} tabIndex={0}>
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-6 px-0 d-none d-sm-block">
@@ -197,7 +197,7 @@ const Register = () => {
                       type="text"
                       id="names"
                       defaultValue={nombre}
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="names">
                       Names
@@ -208,7 +208,7 @@ const Register = () => {
                       type="text"
                       id="lastName"
                       defaultValue={apellido}
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="LastName">
                       Last Name
@@ -222,7 +222,7 @@ const Register = () => {
                       type="text"
                       id="user"
                       defaultValue={users}
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="user">
                       Usser
@@ -233,7 +233,7 @@ const Register = () => {
                       type="text"
                       id="telephone"
                       defaultValue={tel}
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="telephone">
                       Telephone
@@ -246,7 +246,7 @@ const Register = () => {
                     type="text"
                     id="email"
                     defaultValue={email}
-                    className="form-control form-control-lg"
+                    className="form-control form-control-lg shadow"
                   />
                   <label className="form-label" form="email">
                     email
@@ -259,7 +259,7 @@ const Register = () => {
                       type="password"
                       id="password"
                       defaultValue={contrasena}
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="password">
                       password
@@ -270,7 +270,7 @@ const Register = () => {
                       type="password"
                       id="repeat"
                       defaultValue={recon}
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="repeat">
                       repeat Password
@@ -278,9 +278,9 @@ const Register = () => {
                   </div>
                 </div>
 
-                <div className="pt-1 mb-4">
+                <div className="pt-1 mb-4 ">
                   <button
-                    className="btn btn-info btn-lg btn-block"
+                    className="btn btn-outline-success btn-lg  shadow"
                     type="button"
                   >
                     Register

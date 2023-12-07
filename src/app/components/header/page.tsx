@@ -29,7 +29,7 @@ const Header = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <a className="nav-link active" aria-current="page" href="/components/Pagetest">
                   Test yourself
                 </a>
               </li>
@@ -40,7 +40,7 @@ const Header = () => {
               </li>
             </ul>
             <form className="d-flex" role="search">
-              <a className="btn btn-outline-success" type="submit" href="/components/login">
+              <a className="btn btn-outline-success btn-lg" type="submit" href="/components/login">
                 Login
               </a>
             </form>
