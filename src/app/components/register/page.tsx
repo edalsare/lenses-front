@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+import { handleChange, saveUser, dats } from "@/app/scripts/register";
+
 const Register = () => {
   useEffect(() => {}, []);
 
@@ -45,7 +47,7 @@ const Register = () => {
 
     setTimeout(() => {
       escuchar();
-    }, 8000);
+    }, 11000);
   };
 
   const fetchPosts = () => {
@@ -59,64 +61,78 @@ const Register = () => {
     if (men == "Continuar." || men == "continuar") {
       if (estado == 2) {
         //se encarga de ecuchar e ingresar usuario
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setNombre(event.results[0][0].transcript);
           setEstado(estado + 1);
         };
         reconocimiento.start();
+      }, 1000);
         let mensaje = new SpeechSynthesisUtterance("Menciona tu nombre");
         window.speechSynthesis.speak(mensaje);
       } else if (estado == 3) {
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setApellido(event.results[0][0].transcript);
           setEstado(estado + 1);
         };
         reconocimiento.start();
+      }, 1000);
 
         let mensaje = new SpeechSynthesisUtterance("Menciona tus apellidos");
         window.speechSynthesis.speak(mensaje);
       } else if (estado == 4) {
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setUsers(event.results[0][0].transcript);
           setEstado(estado + 1);
         };
         reconocimiento.start();
+      }, 1000);
 
         let mensaje = new SpeechSynthesisUtterance("Menciona tu usuario");
         window.speechSynthesis.speak(mensaje);
       } else if (estado == 5) {
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setTel(event.results[0][0].transcript);
           setEstado(estado + 1);
         };
         reconocimiento.start();
+      }, 1000);
 
         let mensaje = new SpeechSynthesisUtterance("Menciona tu teléfono");
         window.speechSynthesis.speak(mensaje);
       } else if (estado == 6) {
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setEmail(event.results[0][0].transcript);
           setEstado(estado + 1);
         };
         reconocimiento.start();
+      }, 1000);
 
         let mensaje = new SpeechSynthesisUtterance("Menciona tu correo");
         window.speechSynthesis.speak(mensaje);
       } else if (estado == 7) {
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setPassword(event.results[0][0].transcript);
           setEstado(estado + 1);
         };
         reconocimiento.start();
+      }, 1000);
 
         let mensaje = new SpeechSynthesisUtterance("Menciona tu contraseña");
         window.speechSynthesis.speak(mensaje);
       } else if (estado == 8) {
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setRecon(event.results[0][0].transcript);
           setEstado(estado + 1);
         };
         reconocimiento.start();
+      }, 1000);
 
         let mensaje = new SpeechSynthesisUtterance("repite tu contraseña");
         window.speechSynthesis.speak(mensaje);
@@ -125,6 +141,8 @@ const Register = () => {
           reconocimiento.onresult = function (event) {
             var aux = event.results[0][0].transcript;
             if (aux == "Aceptar." || aux == "aceptar") {
+              dats(nombre, apellido, users, tel, email, password)
+              saveUser()
               setNombre("");
               setApellido("");
               setUsers("");
@@ -147,7 +165,7 @@ const Register = () => {
             }
           };
           reconocimiento.start();
-        }, 2000);
+        }, 4500);
 
         let mensaje = new SpeechSynthesisUtterance(
           "Di aceptar para enviar el registro, o cancelar para eliminar el registro"
@@ -190,6 +208,7 @@ const Register = () => {
                       type="text"
                       id="names"
                       defaultValue={nombre}
+                      onChange={handleChange}
                       className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="names">
@@ -201,6 +220,7 @@ const Register = () => {
                       type="text"
                       id="lastName"
                       defaultValue={apellido}
+                      onChange={handleChange}
                       className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="LastName">
@@ -215,6 +235,7 @@ const Register = () => {
                       type="text"
                       id="user"
                       defaultValue={users}
+                      onChange={handleChange}
                       className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="user">
@@ -226,6 +247,7 @@ const Register = () => {
                       type="text"
                       id="telephone"
                       defaultValue={tel}
+                      onChange={handleChange}
                       className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="telephone">
@@ -239,6 +261,7 @@ const Register = () => {
                     type="text"
                     id="email"
                     defaultValue={email}
+                    onChange={handleChange}
                     className="form-control form-control-lg shadow"
                   />
                   <label className="form-label" form="email">
@@ -252,6 +275,7 @@ const Register = () => {
                       type="password"
                       id="password"
                       defaultValue={password}
+                      onChange={handleChange}
                       className="form-control form-control-lg shadow"
                     />
                     <label className="form-label" form="password">
@@ -273,6 +297,7 @@ const Register = () => {
 
                 <div className="pt-1 mb-4 ">
                   <button
+                  onClick={saveUser}
                     className="btn btn-outline-success btn-lg  shadow"
                     type="button"
                   >
