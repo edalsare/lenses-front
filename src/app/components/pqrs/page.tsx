@@ -84,8 +84,6 @@ const Pqrs = () => {
           reconocimiento.onresult = function (event) {
             var aux = event.results[0][0].transcript;
             if (aux == "Enviar." || aux == "enviar") {
-              const namess = document.getElementById("FullName")?.ariaValueText;
-              console.log(namess)
               speak(nombres, correo, des)
               handleEmail();
               router.push("/");

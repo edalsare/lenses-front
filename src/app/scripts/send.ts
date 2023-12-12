@@ -19,7 +19,7 @@ export const handleEmail = async () => {
   let user = await res.data;
 };
 
-export function speak(name, mail, msj){
+export function speak(name:string, mail:string, msj:string){
     names = name;
     email = mail;
     message = msj;
