@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="header-info">
           <div className="header-title">Direccion</div>
           <div>Carrera 5A # 22a-03</div>
-          <div>Ipieales - Nariño</div>
+          <div>Sito web</div>
         </div>
       </div>
       <div className="section-footer">
@@ -17,14 +17,15 @@ const Footer = () => {
         <div className="header-info">
           <div className="header-title">Telefono</div>
           <div>PBX: 7210986</div>
-          <div className="bi bi-whatsapp"> 3137364953</div>
+          <div className="bi bi-whatsapp"> 0000000</div>
         </div>
       </div>
       <div className="section-footer">
         <h1 className="bi bi-envelope-at icons"></h1>
         <div className="header-info">
           <div className="header-title">Correo Electronico</div>
-          <div>fonibero@ibero.edu.co</div>
+          <div>esalaz15@ibero.edu.co</div>
+          <div>lgiral31@ibero.edu.co</div>
         </div>
       </div>
     </div>

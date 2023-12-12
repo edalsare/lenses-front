@@ -27,17 +27,19 @@ const router = useRouter();
       reconocimiento.lang = "es-ES";
         reconocimiento.onresult = function (event) {
           var aux = (event.results[0][0].transcript);
-          console.log(aux)
           if(aux=="Repetir." || aux=="repetir"){            
             setItems(event.results[0][0].transcript);
             navMenu();
           }else if(aux=="Comenzar." || aux=="comenzar" ){
-            console.log(aux);
             router.push("/components/login");
+          }else if(aux=="Evaluar." || aux=="evaluar" ){
+            router.push("/components/Pagetest");
+          }else if(aux=="Mensaje." || aux=="mensaje" ){
+            router.push("/components/pqrs");
           }
         };
         reconocimiento.start();
-      }, 17000);
+      }, 20000);
 
     
 

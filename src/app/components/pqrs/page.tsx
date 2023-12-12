@@ -1,12 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-
+import { handleChange, handleEmail, speak } from "../../scripts/send";
 const Pqrs = () => {
-
   const [men, setMen] = useState("");
   const [estado, setEstado] = useState(1);
-  const [nombres, setNombres] = useState("")
+  const [nombres, setNombres] = useState("");
   const [correo, setCorreo] = useState("");
   const [des, setDes] = useState("");
   const router = useRouter();
@@ -15,8 +14,9 @@ const Pqrs = () => {
     const reconocimiento = new window.webkitSpeechRecognition();
     reconocimiento.lang = "es-ES";
     reconocimiento.onresult = function (event) {
-      setMen(event.results[0][0].transcript);
+       setMen(event.results[0][0].transcript);
       setEstado(estado + 1);
+      console.log(men);
     };
     reconocimiento.start();
   };
@@ -31,73 +31,83 @@ const Pqrs = () => {
     let mensaje3 = new SpeechSynthesisUtterance(
       "Di inicio para volver a la página principal"
     );
-    
+
     window.speechSynthesis.speak(mensaje3);
- 
+
     setTimeout(() => {
       escuchar();
-    }, 7000);
+    }, 8000);
   };
 
-  const fetchPosts =()=>{
+  const fetchPosts = () => {
     const reconocimiento = new window.webkitSpeechRecognition();
     reconocimiento.lang = "es-ES";
-    
 
-    if(estado == 1){
+    if (estado == 1) {
       mensaje();
     }
     if (men == "Continuar." || men == "continuar") {
-      if(estado ==2){
+      if (estado == 2) {
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setNombres(event.results[0][0].transcript);
-          setEstado(estado+1);
+          setEstado(estado + 1);
         };
         reconocimiento.start();
-        let mensaje = new SpeechSynthesisUtterance("Menciona tu nombre completo");
+      }, 2000);
+        let mensaje = new SpeechSynthesisUtterance(
+          "Menciona tu nombre completo"
+        );
         window.speechSynthesis.speak(mensaje);
-      } else if(estado ==3){
+      } else if (estado == 3) {
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setCorreo(event.results[0][0].transcript);
-          setEstado(estado+1);
+          setEstado(estado + 1);
         };
         reconocimiento.start();
+      }, 2000);
         let mensaje = new SpeechSynthesisUtterance("Menciona tu correo");
         window.speechSynthesis.speak(mensaje);
-      }else if(estado ==4){
+      } else if (estado == 4) {
+        setTimeout(() => {
         reconocimiento.onresult = function (event) {
           setDes(event.results[0][0].transcript);
-          setEstado(estado+1);
+          setEstado(estado + 1);
         };
         reconocimiento.start();
+      }, 2000);
         let mensaje = new SpeechSynthesisUtterance("Dejanos tu mensaje");
         window.speechSynthesis.speak(mensaje);
-      }else if(estado ==5){
+      } else if (estado == 5) {
         setTimeout(() => {
           reconocimiento.onresult = function (event) {
-            var aux = (event.results[0][0].transcript);
-            if(aux == "Enviar." || aux == "enviar"){
-              setNombres("");
-              setCorreo("");
-              setDes("");
+            var aux = event.results[0][0].transcript;
+            if (aux == "Enviar." || aux == "enviar") {
+              const namess = document.getElementById("FullName")?.ariaValueText;
+              console.log(namess)
+              speak(nombres, correo, des)
+              handleEmail();
               router.push("/");
-            }else if(aux == "Cancelar." || aux=="cancelar"){
+            } else if (aux == "Cancelar." || aux == "cancelar") {
               setNombres("");
               setCorreo("");
               setDes("");
               router.push("/");
             }
           };
-          
+
           reconocimiento.start();
-        },2000)        
-        let mensaje = new SpeechSynthesisUtterance("Di enviar para aceptar el mensaje o cancelar para anular el envio");
+        }, 3000);
+        let mensaje = new SpeechSynthesisUtterance(
+          "Di enviar para aceptar el mensaje o cancelar para anular el envio"
+        );
         window.speechSynthesis.speak(mensaje);
       }
-    }else if(men == "Inicio." || men == "inicio"){
+    } else if (men == "Inicio." || men == "inicio") {
       router.push("/");
     }
-  }
+  };
 
   return (
     <section className="vh-100" onKeyDown={fetchPosts} tabIndex={0}>
@@ -122,6 +132,7 @@ const Pqrs = () => {
                 </label>
                 <input
                   type="Text"
+                  onChange={handleChange}
                   className="form-control"
                   id="FullName"
                   defaultValue={nombres}
@@ -134,6 +145,7 @@ const Pqrs = () => {
                 </label>
                 <input
                   type="email"
+                  onChange={handleChange}
                   className="form-control"
                   id="EmailAdress"
                   defaultValue={correo}
@@ -144,15 +156,19 @@ const Pqrs = () => {
                 <label form="coment" className="form-label">
                   Coment
                 </label>
-                <textarea
+                <input
+                  onChange={handleChange}
                   className="form-control"
                   id="coment"
                   defaultValue={des}
-                  rows={5}
-                ></textarea>
+                ></input>
               </div>
               <div className="float-end bottom-0 mt-5">
-                <button type="button" className="btn btn-outline-success btn-lg" >
+                <button
+                  type="button"
+                  className="btn btn-outline-success btn-lg"
+                  onClick={handleEmail}
+                >
                   Send
                 </button>
               </div>
