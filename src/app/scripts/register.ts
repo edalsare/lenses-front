@@ -1,9 +1,15 @@
+'use client'
+import React, {useContext} from "react";
 import axios from "axios";
+import { Context } from "../components/context/userContext";
+import { UserContextState } from "./user";
 
 var names:string;
 var last_names:string, users:string, telephone:string, email:string, password:string;
 
 export const saveUser = async () => {
+
+    const { loginUser} = useContext(Context) as UserContextState;
   
   let register = {
     names,
@@ -18,6 +24,12 @@ export const saveUser = async () => {
   };
   let res = await axios.post("http://localhost:8000/register/save", register);
   let user = await res.data;
+  if (user){
+    localStorage.setItem("curUserI", user.userId);
+    loginUser(user);
+    localStorage.setItem("curUserL", "true");
+    
+}
 };
 
 export function dats(namesr:string, lastnamer:string, usersr:string, telephoner:string, emailr:string, passwordr:string){

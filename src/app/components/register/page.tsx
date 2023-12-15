@@ -152,6 +152,7 @@ const Register = () => {
               setRecon("");
               setEstado(1);
               setMen("");
+              router.push("/components/myhome");
             } else if (aux == "Cancelar." || aux == "cancelar") {
               setNombre("");
               setApellido("");

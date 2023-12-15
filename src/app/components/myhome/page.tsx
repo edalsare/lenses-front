@@ -1,11 +1,17 @@
-import React from "react";
+'use client'
+import React, {useContext, useState} from "react";
+import { Context } from "../context/userContext";
+import { User, UserContextState } from "@/app/scripts/user";
 
 const MyHome = () =>{
+  const {currentUser} = useContext(Context) as UserContextState;
+
+  const [inputNames, setInputNames] = useState<string>(currentUser.names);
     return(
         <>
         <div className="row justify-content-end ">
     <div className="col-4 text-end me-5"><h1><i className="bi bi-person-badge-fill"></i></h1>
-        EDISON SALAZAR
+        <input defaultValue={inputNames}/>
     </div>
     </div>
 <div className="row row-cols-1 row-cols-md-3 g-4 m-5">
