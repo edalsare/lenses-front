@@ -8,6 +8,7 @@ const Pqrs = () => {
   const [nombres, setNombres] = useState("");
   const [correo, setCorreo] = useState("");
   const [des, setDes] = useState("");
+  const [repetir, setRepetir] = useState(1);
   const router = useRouter();
 
   const escuchar = () => {
@@ -54,9 +55,9 @@ const Pqrs = () => {
           setEstado(estado + 1);
         };
         reconocimiento.start();
-      }, 2000);
+      }, 3000);
         let mensaje = new SpeechSynthesisUtterance(
-          "Menciona tu nombre completo"
+          "Menciona tu nombre completo y presiona una tecla"
         );
         window.speechSynthesis.speak(mensaje);
       } else if (estado == 3) {
@@ -66,8 +67,8 @@ const Pqrs = () => {
           setEstado(estado + 1);
         };
         reconocimiento.start();
-      }, 2000);
-        let mensaje = new SpeechSynthesisUtterance("Menciona tu correo");
+      }, 3000);
+        let mensaje = new SpeechSynthesisUtterance("Menciona tu correo y presiona una tecla");
         window.speechSynthesis.speak(mensaje);
       } else if (estado == 4) {
         setTimeout(() => {
@@ -76,8 +77,8 @@ const Pqrs = () => {
           setEstado(estado + 1);
         };
         reconocimiento.start();
-      }, 2000);
-        let mensaje = new SpeechSynthesisUtterance("Dejanos tu mensaje");
+      }, 3000);
+        let mensaje = new SpeechSynthesisUtterance("Dejanos tu mensaje y presiona una tecla");
         window.speechSynthesis.speak(mensaje);
       } else if (estado == 5) {
         setTimeout(() => {
@@ -106,6 +107,11 @@ const Pqrs = () => {
       router.push("/");
     }
   };
+
+  if(repetir==1){
+    setRepetir(2);
+    fetchPosts();
+  }
 
   return (
     <section className="vh-100" onKeyDown={fetchPosts} tabIndex={0}>

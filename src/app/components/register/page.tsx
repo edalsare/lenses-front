@@ -17,6 +17,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [recon, setRecon] = useState("");
   const router = useRouter();
+  const [repetir, setRepetir] = useState(1);
   var ban = "";
 
   const escuchar = () => {
@@ -44,10 +45,14 @@ const Register = () => {
       "Di inicio para volver a la página principal"
     );
     window.speechSynthesis.speak(mensaje3);
+    let mensaje4 = new SpeechSynthesisUtterance(
+      "despues de cada comando presiona una tecla"
+    );
+    window.speechSynthesis.speak(mensaje4);
 
     setTimeout(() => {
       escuchar();
-    }, 11000);
+    }, 13000);
   };
 
   const fetchPosts = () => {
@@ -181,6 +186,11 @@ const Register = () => {
       router.push("/");
     }
   };
+
+  if(repetir==1){
+    setRepetir(2);
+    fetchPosts();
+  }
 
   return (
     <section className="pb-0" onKeyDown={fetchPosts} tabIndex={0}>

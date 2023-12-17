@@ -1,8 +1,57 @@
-import React from "react";
+'use client'
+import Link from "next/link";
+import React,{useState} from "react";
+import { useRouter } from "next/navigation";
 
 const Test = () =>{
+
+  const [repetir, setRepetir] = useState(1);
+
+  const router = useRouter();
+
+  const fetchPosts = () => {
+
+    const reconocimiento = new window.webkitSpeechRecognition();
+    reconocimiento.lang = "es-ES";
+
+      let mensaje = new SpeechSynthesisUtterance("pagina de Evaluacion");
+      window.speechSynthesis.speak(mensaje);
+      let mensaje1 = new SpeechSynthesisUtterance("Para relizar el primer test di comenzar");
+      window.speechSynthesis.speak(mensaje1);
+      let mensaje2 = new SpeechSynthesisUtterance("Para regresar a la pagina principal di regresar");
+      window.speechSynthesis.speak(mensaje2);
+      let mensaje3 = new SpeechSynthesisUtterance("para repetir este menu presiona una tecla");
+      window.speechSynthesis.speak(mensaje3);
+
+
+      setTimeout(() => {
+        reconocimiento.onresult = function (event) {
+          console.log(event.results[0][0].transcript);
+          var ban = (event.results[0][0].transcript);
+          console.log(ban);
+          
+          if(ban=="Comenzar." || ban=="comenzar"){
+            router.push("/components/video");
+          }
+          else if(ban=="Regresar." || ban=="regresar"){
+            router.push("/");
+          }          
+        };
+        reconocimiento.start();
+      }, 12000);
+    
+
+  };  
+
+  
+  if(repetir==1){
+    setRepetir(2);
+    fetchPosts()
+  }
+
+
     return(
-        <div className="row row-cols-1 row-cols-md-3 g-4 m-5">
+        <div className="row row-cols-1 row-cols-md-3 g-4 m-5" onKeyDown={fetchPosts} tabIndex={0}>
   <div className="col">
     <div className="card border-info mb-3">
       <img src="/img/Test1.jpeg" className="card-img-top" alt="..."/>
@@ -12,7 +61,8 @@ const Test = () =>{
         know yourself a little more. This test is created by OXFORD and we consider it
          to be the most realistic and correct option regarding your knowledge..</p>
       </div>
-      <button type="button" className="btn btn-outline-info btn-lg"><a href="https://www.oxfordonlineenglish.com/english-level-test/listening">More</a>    </button>
+      <Link href="/components/video">More</Link>
+      <button type="button" className="btn btn-outline-info btn-lg">More    </button>
     </div>
   </div>
   <div className="col">

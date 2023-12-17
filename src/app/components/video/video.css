@@ -1,0 +1,10 @@
+.video{
+    margin: 5%;
+    display: flex;
+    position: sticky;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: auto;
+    height: 360px;
+}

@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from "react";
+import React, {useState,useLayoutEffect} from "react";
 import { useRouter } from "next/navigation";
 import "./Homes.css";
 
@@ -7,6 +7,8 @@ const Homes = () => {
 const [repetir, setRepetir] = useState(1);
 const [items, setItems] = useState(" ");
 const router = useRouter();
+
+  
 
   const navMenu = () =>{
     
@@ -47,6 +49,10 @@ const router = useRouter();
     
       
 
+  }
+  if(repetir==1){
+    setRepetir(2);
+    navMenu();
   }
   return (
     <div className="container text-center" onKeyDown={navMenu} tabIndex={0}>

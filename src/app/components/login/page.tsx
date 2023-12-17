@@ -3,10 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const App = () => {
+
+  const [repetir, setRepetir] = useState(1);
   
-  useEffect(() => {
-    
-  }, []);
 
 
   const [ban, setBan] = useState(1);
@@ -26,7 +25,7 @@ const App = () => {
       window.speechSynthesis.speak(mensaje1);
       let mensaje2 = new SpeechSynthesisUtterance("Para registrarte di siguiente");
       window.speechSynthesis.speak(mensaje2);
-      let mensaje3 = new SpeechSynthesisUtterance("Para regresar al menu anterior di regresar");
+      let mensaje3 = new SpeechSynthesisUtterance("Para regresar al menu anterior di regresar. para repetir este menu presiona una tecla");
       window.speechSynthesis.speak(mensaje3);
 
 
@@ -48,14 +47,14 @@ const App = () => {
             //se encarga de ecuchar e ingresar contraseña
           setTimeout(() => {
             setBan(2);
-            let mensaje1 = new SpeechSynthesisUtterance("Menciona Contraseña");
+            let mensaje1 = new SpeechSynthesisUtterance("Menciona Contraseña y presiona una tecla");
             window.speechSynthesis.speak(mensaje1);
               setTimeout(() => {
               reconocimiento.onresult = function (event) {
                 setContrasena(event.results[0][0].transcript);
               };
               reconocimiento.start();
-            }, 1500);
+            }, 2000);
           }, 4800);
           }//fin if continuar
           else if(ban=="Siguiente." || ban=="siguiente"){
@@ -66,16 +65,18 @@ const App = () => {
           }          
         };
         reconocimiento.start();
-      }, 10000);
+      }, 13000);
     }else if(ban==2){
       let mensaje1 = new SpeechSynthesisUtterance("Di aceptar para ingresar, o di cancelar para declinar");
             window.speechSynthesis.speak(mensaje1);
+            setTimeout(() => {
             reconocimiento.onresult = function (event) {
               var men=(event.results[0][0].transcript);
               if(men=="Aceptar." || men=="aceptar"){
                 setBan(1);
                 setNombre("");
                 setContrasena("");
+                router.push('/components/myhome');
               }else if(men=="Cancelar." ||men=="cancelar"){
                 setBan(1);
                 setNombre("");
@@ -83,9 +84,16 @@ const App = () => {
               }
             };
             reconocimiento.start();
+          }, 3000);
     } 
 
   };  
+
+  
+  if(repetir==1){
+    setRepetir(2);
+    fetchPosts()
+  }
 
   return (
    <section className="vh-100" onKeyDown={fetchPosts} tabIndex={0}>
